@@ -1,0 +1,40 @@
+<!--<link rel="stylesheet" href="../StyleSheet.css" />-->
+
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2"> Filter by</div>
+            <div class="col-md-4"> <input [(ngModel)]="filterBy" /> </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"><h4>Filtered by:{{frilterBy}}</h4> </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table *ngIf="filteredProducts && filteredProducts.length" class="table" >
+            <thead>
+                <tr>
+                    <th class="btn btn-primary" (click)="toggleImage()">{{showImage?'Hide':'Show'}} Image</th>
+                    <th>Code</th>
+                    <th>Product</th>
+                    <th>Available</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of filteredProducts">
+                    <td><img *ngIf="showImage" [src]='product.imageUrl' [style.width.px]="imageWidth" [style.margin.px]="imageMargin" /></td>
+                    <td>{{product.code | ConvertToSpace:'-'}}</td>
+                    <td>{{product.product}}</td>
+                    <td>{{product.available}}</td>
+                    <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
+                    <td><pm-star [rating]="product.rating" (ratingClicked)="OnRatingClicked($event)"></pm-star></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
