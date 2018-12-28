@@ -13,6 +13,8 @@ import { ProductListComponent } from './products/product-list.component';
 import { ConvertToSpace } from './../Shared/convert-to-space.pipe';
 import { StarComponent } from './../Shared/starcomponent/star.component';
 import { ProductService } from './products/product.service';
+import { ProductDetailComponent } from './products/product-detail.component';
+import { ProductDetailGuard } from './products/product-detail.guard';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ProductService } from './products/product.service';
     FetchDataComponent,
     ProductListComponent,
     StarComponent,
-    ConvertToSpace
+    ConvertToSpace,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,9 +37,10 @@ import { ProductService } from './products/product.service';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'products', component: ProductListComponent },
+      { path: 'product/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
     ])
   ],
-  providers: [],
+  providers: [ProductDetailGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

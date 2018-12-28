@@ -11,11 +11,10 @@ namespace ASP.NET_Core_2._1_with_Angular_71.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        public IActionResult GetProducts()
-        {
-            var products = new[]
+        dynamic[] products= new[]
             {
                 new {
+                    id=1,
                     code ="Comp-001",
                     product = "Computer",
                     available = "true",
@@ -24,6 +23,7 @@ namespace ASP.NET_Core_2._1_with_Angular_71.Controllers
                     imageUrl = "https://openclipart.org/download/265342/COMPUTADOR.svg"
                 },
                 new {
+                    id=2,
                     code ="Lap-002",
                     product = "Laptop",
                     available = "true",
@@ -32,6 +32,7 @@ namespace ASP.NET_Core_2._1_with_Angular_71.Controllers
                     imageUrl = "https://openclipart.org/download/204064/Happy-Computer.svg",
                 },
                 new {
+                    id=3,
                     code ="Tab-003",
                     product = "Tablet",
                     available = "true",
@@ -40,6 +41,7 @@ namespace ASP.NET_Core_2._1_with_Angular_71.Controllers
                     imageUrl = "https://openclipart.org/download/178889/1370290172.svg",
                 },
                 new {
+                    id=4,
                     code ="Note-004",
                     product = "Notepad",
                     available = "true",
@@ -49,6 +51,13 @@ namespace ASP.NET_Core_2._1_with_Angular_71.Controllers
                 }
             };
 
+        [Route("{id}")]
+        public IActionResult GetProduct(int id)
+        {
+            return Ok(products.Where(prod=> prod.id==id).FirstOrDefault());
+        }
+        public IActionResult GetProducts()
+        {
             return Ok(products);
         }
     }

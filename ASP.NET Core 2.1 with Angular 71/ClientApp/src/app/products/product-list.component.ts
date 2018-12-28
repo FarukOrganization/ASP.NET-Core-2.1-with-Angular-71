@@ -21,8 +21,6 @@ export class ProductListComponent implements OnInit {
         this.products = products;
         this.filteredProducts = this.products;
       }, error => this.errorMessage = <any>error);
-        //this.products = this.productService.getProducts();
-        //this.filteredProducts = this.products;
         this.filterBy = "Comp";
     }
 

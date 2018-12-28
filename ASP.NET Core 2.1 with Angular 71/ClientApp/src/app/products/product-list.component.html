@@ -16,24 +16,35 @@
     <div class="table-responsive">
         <table *ngIf="filteredProducts && filteredProducts.length" class="table" >
             <thead>
-                <tr>
-                    <th class="btn btn-primary" (click)="toggleImage()">{{showImage?'Hide':'Show'}} Image</th>
-                    <th>Code</th>
-                    <th>Product</th>
-                    <th>Available</th>
-                    <th>Price</th>
-                    <th>Rating</th>
-                </tr>
+              <tr>
+                <th class="btn btn-primary" (click)="toggleImage()">{{showImage?'Hide':'Show'}} Image</th>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Product</th>
+                <th>Available</th>
+                <th>Price</th>
+                <th>Rating</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of filteredProducts">
-                    <td><img *ngIf="showImage" [src]='product.imageUrl' [style.width.px]="imageWidth" [style.margin.px]="imageMargin" /></td>
-                    <td>{{product.code | ConvertToSpace:'-'}}</td>
-                    <td>{{product.product}}</td>
-                    <td>{{product.available}}</td>
-                    <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
-                    <td><pm-star [rating]="product.rating" (ratingClicked)="OnRatingClicked($event)"></pm-star></td>
-                </tr>
+              <tr *ngFor="let product of filteredProducts">
+                <td><img *ngIf="showImage" [src]='product.imageUrl' [style.width.px]="imageWidth" [style.margin.px]="imageMargin" /></td>
+                <td>
+                  <a [routerLink]='["/product",product.id]' class="nav-link">
+                    <span class='fas fa-database'></span> {{product.id}}
+                  </a>
+                </td>
+                <td>
+                  <a [routerLink]='["/product",product.code]' class="nav-link">
+                    <span class='fas fa-database'></span> {{product.code | ConvertToSpace:'-'}}
+                  </a>
+                </td>
+                <!--<td>{{product.code | ConvertToSpace:'-'}}</td>-->
+                <td>{{product.product}}</td>
+                <td>{{product.available}}</td>
+                <td>{{product.price | currency:'USD':'symbol':'1.2-2'}}</td>
+                <td><pm-star [rating]="product.rating" (ratingClicked)="OnRatingClicked($event)"></pm-star></td>
+              </tr>
             </tbody>
         </table>
     </div>
