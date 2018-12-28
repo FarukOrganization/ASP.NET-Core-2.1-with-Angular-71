@@ -8,17 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductDetailGuard } from './product-detail.guard';
+import { SharedModule } from '../../Shared/shared.module';
 
 @NgModule({
   declarations: [ProductListComponent,
-    StarComponent,
-    ConvertToSpace,
     ProductDetailComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
+    RouterModule.forChild([
       { path: 'products', component: ProductListComponent },
       { path: 'product/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
     ])
